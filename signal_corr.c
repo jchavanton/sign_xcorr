@@ -1,14 +1,10 @@
 #include <stdio.h>
 #include <math.h>
-// #define NRANSI
 #include "stdint.h"
 #include "kissfft/tools/kiss_fftr.h"
 #include "kissfft/_kiss_fft_guts.h"
-//#include "kiss_xcorr/include/kiss_xcorr.h"
 
 const int sampling_hz=8000;
-const int samples=4096; // must be muliple of 2 // 32768;
-int N, NN, NN2;
 int debug=0;
 
 FILE* open_file (char *fn) {
@@ -16,7 +12,6 @@ FILE* open_file (char *fn) {
 	FILE *ref = fopen(fn, "r");
 	return ref;
 }
-
 
 // KISS FFT
 static void read_raw_image(const char *fname, size_t N, kiss_fft_scalar *dst) {
@@ -72,7 +67,8 @@ int do_kissfft (char *fn) {
 			}
 			norm_bin_mag = 2. * sqrt(cbuf[i].r*cbuf[i].r + cbuf[i].i*cbuf[i].i) / (float)nfft;
 			amplitude = 20. * log10(norm_bin_mag);
-			printf("d[%s] bin_fz[%f] mag[%f]dB[%f]\n", __FUNCTION__, bin*fz_bin, norm_bin_mag, amplitude);
+			if (amplitude > -30)
+			printf("d[%s] bin_fz[%f] magnitude[%f]dB[%f]\n", __FUNCTION__, bin*fz_bin, norm_bin_mag, amplitude);
 		}
 		printf("[%s] sampling_fz[%d] bin_fz[%f] max energy found in Fz[%f]\n", __FUNCTION__, sampling_hz, fz_bin, max_e_f);
 	}
@@ -95,4 +91,3 @@ int main(void) {
 	test();
 	return 1;
 }
-#undef NRANSI
