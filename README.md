@@ -14,3 +14,6 @@ make
 ## this app is using 
 https://github.com/mborgerding/kissfft
 
+
+# https://en.wikipedia.org/wiki/Dynamic_time_warping
+
