@@ -17,4 +17,5 @@ https://github.com/mborgerding/kissfft
 
 # extra
 https://en.wikipedia.org/wiki/Dynamic_time_warping
+http://www.speech.zone/exercises/dtw-in-python/recap-of-how-dtw-works/
 
